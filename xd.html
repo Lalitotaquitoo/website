@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contador y Frase Secuencial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Agrega la imagen de fondo y ajusta el estilo */
+            background-image: url('Alterna.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* Establece el color de fondo del body para asegurar que el fondo no sea blanco */
+            background-color: #f0f0f0; /* Puedes ajustar este color según tus preferencias */
+        }
+
+        .decorated-text {
+            font-size: 24px;
+            color: white;
+            /* Agrega un contorno negro al texto */
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+
+        .heart {
+            color: #ff1744;
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: white;
+            /* Agrega un contorno negro al texto */
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+
+        #contador {
+            font-size: 24px;
+            color: white;
+            /* Agrega un contorno negro al texto */
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+
+        #inputText {
+            width: 300px;
+            margin: 10px;
+        }
+
+        #inputContainer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #textoGuardado {
+            font-size: 24px;
+            color: white;
+            /* Agrega un contorno negro al texto */
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contador de días</h1>
+    <p id="contador">Cargando...</p>
+    <p>
+        <span id="fraseCambiante" class="decorated-text">Cargando...</span>
+        <span class="heart">♥️</span>
+    </p>
+    <div id="inputContainer">
+        <input type="text" id="inputText" placeholder="Escribe la frase c:">
+        <button onclick="mostrarTexto()">Coloca una frase para que se quede pegada en la pagina</button>
+    </div>
+    <span id="textoGuardado" style="display: none;"></span>
+    <input type="file" id="imageInput" style="display: none;" onchange="showImage(this)" />
+    <button onclick="selectImage()">Subir Imagen</button>
+    <br>
+    <img id="uploadedImage" src="" style="max-width: 300px; display: none;" />
+
+    <script>
+        const inputText = document.getElementById('inputText');
+        const textoGuardado = document.getElementById('textoGuardado');
+        const inputContainer = document.getElementById('inputContainer');
+
+        function mostrarTexto() {
+            const texto = inputText.value;
+            textoGuardado.innerText = texto;
+            textoGuardado.style.display = 'inline';
+            inputText.disabled = true;
+            inputContainer.style.display = 'none';
+
+        }
+        const frases = [
+           "Día 1: \"El reloj comienza a contar, y mi corazón se llena de emoción por el encuentro que nos aguarda.\"",
+            "Día 2: \"Cada día que pasa, siento que mi amor por ti crece más, anhelando el momento de verte.\"",
+            "Día 3: \"El tiempo vuela, pero cada segundo que pasa me acerca más a ti.\"",
+            "Día 4: \"La distancia se desvanece ante el pensamiento de tu presencia.\"",
+            "Día 5: \"Siento como la emoción se eleva, ¡estamos a solo unos días de nuestro reencuentro!\"",
+            "Día 6: \"Cada día sin ti es un recordatorio de cuánto significas para mí.\"",
+            "Día 7: \"Siete días más cerca de abrazarte, sentirte y perderme en tu mirada.\"",
+            "Día 8: \"Mi corazón late con fuerza, sintiendo que el amor nos une aunque estemos separados.\"",
+            "Día 9: \"Las horas pasan lentamente, pero cada segundo vale la pena por el momento que se avecina.\"",
+            "Día 10: \"A medida que se acerca el día, el sol brilla con más intensidad en mi vida.\"",
+            "Día 11: \"Cada vez más cerca de ti, como imanes que se atraen.\"",
+            "Día 12: \"La espera se hace dulce cuando sé que pronto estarás aquí.\"",
+            "Día 13: \"Cierro los ojos y ya puedo sentir el roce de tus manos en mi piel.\"",
+            "Día 14: \"Dos semanas han pasado, y mi amor por ti sigue inquebrantable.\"",
+            "Día 15: \"La cuenta regresiva continúa, y mi corazón está lleno de entusiasmo y pasión.\"",
+            "Día 16: \"Aunque aún falta, la paciencia se transforma en anhelo y anticipación.\"",
+            "Día 17: \"Cada día es un paso más cerca de estar juntos nuevamente.\"",
+            "Día 18: \"El tiempo parece conspirar a nuestro favor mientras el destino nos acerca.\"",
+            "Día 19: \"La espera solo intensifica la alegría que sentiré al finalmente tenerte frente a mí.\"",
+	    "Día 19: \"La espera solo intensifica la alegría que sentiré al finalmente tenerte frente a mí.\"",
+	    "Día 20: \"Estoy contando los días, pero mi amor por ti es infinito.\"",
+            "Día 21: \"Tres semanas han pasado, pero el amor que siento por ti es eterno.\"",
+	    "Día 22: \"El día se aproxima, y mi corazón late en sintonía con el tuyo.\"",
+"Día 23: \"La espera se hace llevadera sabiendo que pronto estarás en mis brazos.\"",
+"Día 24: \"El deseo de abrazarte es tan fuerte que puedo sentirlo en cada latido de mi corazón.\"",
+"Día 25: \"Cada día que pasa es una hoja del calendario que nos acerca más.\"",
+"Día 26: \"El tiempo nos pone a prueba, pero nuestro amor es más fuerte que cualquier distancia.\"",
+"Día 27: \"Sigo contando los días, sabiendo que pronto seremos uno de nuevo.\"",
+"Día 28: \"Cuatro semanas han pasado, pero mi amor por ti solo se ha fortalecido.\"",
+"Día 29: \"La espera está a punto de terminar, y mi corazón está lleno de alegría.\"",
+"Día 30: \"Cada día es un paso más hacia el reencuentro que tanto anhelo.\"",
+"Día 31: \"Un mes de distancia, pero nuestro amor sigue intacto, esperando el día de vernos.\"",
+"Día 32: \"El tiempo se desvanece cuando pienso en ti, pronto estaremos juntos de nuevo.\"",
+"Día 33: \"Las horas parecen eternas, pero sé que valdrá la pena al final.\"",
+"Día 34: \"El corazón late con entusiasmo, sintiendo que el momento se acerca rápidamente.\"",
+"Día 35: \"Cada día es un paso más cerca de abrazarte y no soltarte jamás.\"",
+"Día 36: \"La espera ha sido larga, pero pronto estaré contigo, donde pertenezco.\"",
+"Día 37: \"Cada momento lejos de ti, solo me hace apreciar lo especial que eres en mi vida.\"",
+"Día 38: \"La distancia no puede apagar la llama de nuestro amor; pronto nos reencontraremos.\"",
+"Día 39: \"Estoy a solo días de sentir de nuevo la felicidad de tenerte a mi lado.\"",
+"Día 40: \"El tiempo no se mueve lo suficientemente rápido, pero sé que valdrá la pena esperar.\"",
+"Día 41: \"La espera está llegando a su fin, y mi corazón se llena de gratitud y emoción.\"",
+"Día 42: \"Cuarenta y dos días de anhelo, pero nuestro amor es más fuerte que nunca.\"",
+  "Día 43: \"Cada día es una cuenta regresiva hacia la felicidad que compartiremos.\"",
+  "Día 44: \"Pronto nos encontraremos, y todo será como un sueño hecho realidad.\"",
+  "Día 45: \"El corazón salta de emoción sabiendo que te veré en poco tiempo.\"",
+  "Día 46: \"La espera ha sido desafiante, pero el amor que siento por ti me da fuerzas.\"",
+  "Día 47: \"Cada día sin ti es una razón más para abrazarte con más fuerza cuando llegues.\"",
+  "Día 48: \"El tiempo se desvanece ante la promesa de un encuentro lleno de amor.\"",
+  "Día 49: \"A solo días de experimentar nuevamente la felicidad que compartimos.\"",
+  "Día 50: \"La cuenta regresiva continúa, y mi corazón palpita en anticipación.\"",
+  "Día 51: \"Cincuenta y un días han pasado, pero el amor que siento por ti solo crece.\"",
+  "Día 52: \"Cada día que pasa, mi corazón late más fuerte, sabiendo que pronto estaré contigo.\"",
+  "Día 53: \"El anhelo se mezcla con emoción, ya queda poco para que estemos juntos otra vez.\"",
+  "Día 54: \"La espera está a punto de terminar, y pronto podré perderme en tu mirada nuevamente.\"",
+  "Día 55: \"Cada día es una promesa de amor y felicidad que compartiremos en nuestro reencuentro.\"",
+  "Día 56: \"El tiempo ha sido una prueba, pero nuestra unión es más fuerte que cualquier obstáculo.\"",
+  "Día 57: \"El día se acerca, y mi corazón se llena de alegría al pensar en volver a verte.\"",
+  "Día 58: \"La espera está llegando a su fin, y la felicidad se asoma en el horizonte.\"",
+  "Día 59: \"Cada día es un paso más hacia el momento mágico que nos espera.\"",
+"Día 60: \"Sesenta días han pasado, pero mi amor por ti es eterno.\"",
+"Día 61: \"El tiempo ha sido solo un preludio para lo que está por venir: nuestro amor en plenitud.\"",
+  "Día 62: \"Cada día sin ti ha sido un recordatorio de cuánto significas para mí.\"",
+  "Día 63: \"El corazón late con entusiasmo, sabiendo que pronto estaremos juntos otra vez.\"",
+  "Día 64: \"Cada día es un paso más hacia la felicidad que compartiremos en nuestro reencuentro.\"",
+  "Día 65: \"El anhelo se mezcla con emoción, y la espera está llegando a su fin.\"",
+  "Día 66: \"Cada día es una promesa de amor y felicidad que compartiremos en nuestro reencuentro.\"",
+  "Día 67: \"El tiempo ha sido una prueba, pero nuestra unión es más fuerte que cualquier obstáculo.\"",
+  "Día 68: \"El día se acerca, y mi corazón se llena de alegría al pensar en volver a verte.\"",
+  "Día 69: \"La espera está llegando a su fin, y la felicidad se asoma en el horizonte.\"",
+  "Día 70: \"Cada día es un paso más hacia el momento mágico que nos espera.\"",
+  "Día 71: \"Setenta y un días han pasado, pero mi amor por ti es eterno e inquebrantable.\"",
+  "Día 72: \"El tiempo ha sido solo un preludio para lo que está por venir: nuestro amor en plenitud.\"",
+  "Día 73: \"Cada día sin ti ha sido un recordatorio de cuánto significas para mí.\"",
+  "Día 74: \"El corazón late con entusiasmo, sabiendo que pronto estaremos juntos otra vez.\"",
+  "Día 75: \"Cada día es un paso más hacia la felicidad que compartiremos en nuestro reencuentro.\"",
+  "Día 76: \"El anhelo se mezcla con emoción, y la espera está llegando a su fin.\"",
+  "Día 77: \"Cada día es una promesa de amor y felicidad que compartiremos en nuestro reencuentro.\"",
+  "Día 78: \"El tiempo ha sido una prueba, pero nuestra unión es más fuerte que cualquier obstáculo.\"",
+  "Día 79: \"El día se acerca, y mi corazón se llena de alegría al pensar en volver a verte.\"",
+  "Día 80: \"La espera está llegando a su fin, y la felicidad se asoma en el horizonte.\"",
+  "Día 81: \"Cada día es un paso más hacia el momento mágico que nos espera.\"",
+  "Día 82: \"Ochenta y dos días han pasado, pero mi amor por ti es eterno e inquebrantable.\"",
+  "Día 83: \"El tiempo ha sido solo un preludio para lo que está por venir: nuestro amor en plenitud.\"",
+  "Día 84: \"Cada día sin ti ha sido un recordatorio de cuánto significas para mí.\"",
+  "Día 85: \"¡Hoy es el día! Finalmente, nuestros corazones se reúnen para compartir este momento lleno de amor y felicidad.\"",
+        ];
+
+        function decorateText(text) {
+            return text;
+        }
+
+        function actualizarContador() {
+            const fechaInicial = new Date("2023-08-05"); // 5 de agosto de 2023
+            const fechaFinal = new Date("2023-10-28"); // 28 de octubre de 2023
+            const hoy = new Date();
+            
+            if (hoy < fechaInicial) {
+                document.getElementById("contador").innerText = "Días restantes: 85";
+            } else if (hoy >= fechaFinal) {
+                document.getElementById("contador").innerText = "Días restantes: 0";
+            } else {
+                const diferencia = fechaFinal - hoy;
+                const diasRestantes = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
+                document.getElementById("contador").innerText = `Días restantes: ${diasRestantes}`;
+            }
+            
+            const indiceFrase = Math.min(hoy.getDate() - fechaInicial.getDate(), frases.length - 1);
+            const fraseCambianteElement = document.getElementById("fraseCambiante");
+            fraseCambianteElement.innerText = frases[indiceFrase];
+        }
+
+        actualizarContador();
+        setInterval(actualizarContador, 86400000); // Actualiza cada 24 horas (86400000 milisegundos)
+	 function selectImage() {
+            const imageInput = document.getElementById('imageInput');
+            imageInput.click();
+        }
+
+       function selectImage() {
+            const imageInput = document.getElementById('imageInput');
+            imageInput.click();
+        }
+
+        // Función para mostrar la imagen subida y guardarla en el almacenamiento local
+        function showImage(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = 'inline';
+
+                    // Guardar la imagen en el almacenamiento local junto con la fecha actual
+                    const imageObject = {
+                        data: e.target.result,
+                        timestamp: Date.now(),
+                    };
+                    localStorage.setItem('uploadedImage', JSON.stringify(imageObject));
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+	
+
+        // Verificar si hay una imagen en el almacenamiento local y mostrarla si ha pasado menos de un día
+        window.onload = function () {
+            const imageObject = localStorage.getItem('uploadedImage');
+            if (imageObject) {
+                const { data, timestamp } = JSON.parse(imageObject);
+                const currentDate = Date.now();
+                const oneDayInMillis = 24 * 60 * 60 * 1000; // 1 día en milisegundos
+
+                // Si ha pasado menos de un día desde que se subió la imagen, mostrarla
+                if (currentDate - timestamp < oneDayInMillis) {
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = data;
+                    uploadedImage.style.display = 'inline';
+                } else {
+                    // Si ha pasado un día o más, eliminar la imagen del almacenamiento local
+                    localStorage.removeItem('uploadedImage');
+                }
+            }
+        };
+
+    </script>
+</body>
+</html>

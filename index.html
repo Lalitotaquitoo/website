@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Autenticación por Fecha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            /* Establece la imagen de fondo y ajusta el estilo */
+            background-image: url('gg.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* Establece el color de fondo del body para asegurar que el texto sea legible */
+            background-color: #f0f0f0; /* Puedes ajustar este color según tus preferencias */
+        }
+
+        h1, p {
+            /* Asegura que el texto sea blanco con contorno negro */
+            color: #fff;
+            text-shadow: -1px 0 0 #000, 0 1px 0 #000, 1px 0 0 #000, 0 -1px 0 #000;
+        }
+
+        input, button {
+            /* Asegura que los elementos de formulario tengan texto negro */
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dias para vernos</h1>
+    <p>Ingresa la fecha de nuestro aniversario para acceder:</p>
+    <input type="date" id="fechaInput" required>
+    <button onclick="verificarFecha()">Ingresar</button>
+
+    <script>
+        function verificarFecha() {
+            const fechaIngresada = document.getElementById("fechaInput").value;
+            const fechaPermitida = "2023-04-30"; // Fecha permitida para el acceso
+
+            if (fechaIngresada === fechaPermitida) {
+                alert("Acceso permitido. Bienvenido.");
+                // Redirige a la página xd.html
+                window.location.href = "xd.html";
+            } else {
+                alert("Fecha incorrecta. No se puede acceder.");
+            }
+        }
+    </script>
+</body>
+</html>
