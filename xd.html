@@ -87,11 +87,14 @@
         const inputContainer = document.getElementById('inputContainer');
 
         function mostrarTexto() {
-            const texto = inputText.value;
-            textoGuardado.innerText = texto;
-            textoGuardado.style.display = 'inline';
-            inputText.disabled = true;
-            inputContainer.style.display = 'none';
+        const texto = inputText.value;
+   	textoGuardado.innerText = texto;
+        textoGuardado.style.display = 'inline';
+    	inputText.disabled = true;
+    	inputContainer.style.display = 'none';
+
+    	// Guardar la frase en el almacenamiento local
+    	localStorage.setItem('fraseGuardada', texto);
 
         }
         const frases = [
@@ -259,6 +262,15 @@
                     localStorage.removeItem('uploadedImage');
                 }
             }
+		 // Obtener la frase guardada del almacenamiento local
+    		const fraseGuardada = localStorage.getItem('fraseGuardada');
+    		if (fraseGuardada) {
+        	// Mostrar la frase guardada en el elemento "textoGuardado"
+        	textoGuardado.innerText = fraseGuardada;
+        	textoGuardado.style.display = 'inline';
+        	inputText.disabled = true;
+        	inputContainer.style.display = 'none';
+    	 }
         };
 
     </script>
