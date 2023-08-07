@@ -71,6 +71,17 @@
         <span id="fraseCambiante" class="decorated-text">Cargando...</span>
         <span class="heart">♥️</span>
     </p>
+     <div id="inputContainer">
+        <input type="text" id="inputText" placeholder="Escribe la frase c:">
+        <button onclick="mostrarTexto()">Coloca una frase para que se quede pegada en la pagina</button>
+    </div>
+    <span id="textoGuardado" style="display: none;"></span>
+    <input type="file" id="imageInput" style="display: none;" onchange="showImage(this)" />
+    <button onclick="selectImage()">Subir Imagen</button>
+    <br>
+    <img id="uploadedImage" src="" style="max-width: 300px; display: none;" />
+	
+
     <div id="inputContainer">
         <input type="text" id="inputText" placeholder="Escribe la frase c:">
         <button onclick="mostrarTexto()">Coloca una frase para que se quede pegada en la pagina</button>
@@ -82,6 +93,7 @@
     <img id="uploadedImage" src="" style="max-width: 300px; display: none;" />
 
     <script>
+	import firebase from 
         const inputText = document.getElementById('inputText');
         const textoGuardado = document.getElementById('textoGuardado');
         const inputContainer = document.getElementById('inputContainer');
@@ -274,5 +286,28 @@
         };
 
     </script>
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+	
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyB4ciDUG3r1czAfNuFElqeh8l7UuRBuWKo",
+	    authDomain: "databaseapril-dbf30.firebaseapp.com",
+	    projectId: "databaseapril-dbf30",
+	    storageBucket: "databaseapril-dbf30.appspot.com",
+	    messagingSenderId: "1056275848176",
+	    appId: "1:1056275848176:web:3ddbc1aa385d08f9ec9b35",
+	    measurementId: "G-830NYLPDXE"
+	  };
+	
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+	</script>
 </body>
 </html>
